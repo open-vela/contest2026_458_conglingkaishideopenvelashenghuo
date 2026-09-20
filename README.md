@@ -284,7 +284,19 @@ python test_time2.py    # 校时链路（主机持口 → 启动 app → TIME �
 
 ---
 
-## 十、许可
+## 十、关于 PR 与 CLA
+
+- 本仓启用了**分支保护**：改动必须通过 **Pull Request** 合入，且要求 `cla/signature`
+  检查通过。**直接 push 到任何分支都会被规则拒绝**（`GH013: Required status check
+  "cla/signature" is expected`）。
+- 因此提交流程为：**fork 本仓 → 在 fork 上推分支 → 向本仓 `dev-ai-contest-2026`
+  分支发起 PR → 自查并自行合入**。
+- 首次贡献需在[官网签署 CLA](https://openvela.com/#/community/cla)（用报名时的
+  GitHub 账号）。若 `cla/signature` 未通过，签署后在 PR 下评论 `/check-cla` 触发复检。
+
+---
+
+## 十一、许可
 
 本项目遵循 **Apache License 2.0**（见 [LICENSE](LICENSE)）。
 第三方组件（openvela/NuttX、LVGL、Vosk 模型等）遵循其各自许可。
