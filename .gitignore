@@ -1,0 +1,22 @@
+# Build artifacts
+build/
+out/
+.build/
+*.o
+*.a
+*.elf
+*.hex
+*.map
+
+# ---- WristClaw ----
+.venv/
+__pycache__/
+*.pyc
+*.bak
+host/models/            # Vosk 离线模型（~40MB，自行下载，不入仓）
+tests/*.log
+tests/console_e2e.log
+tests/verify.bin        # deploy.sh 的读回校验临时文件
+tests/font_symbols.txt  # 字体符号表中间产物（可用 gen_font_symbols.py 重建）
+
+# 注意：logs/ 下的 AI Coding 日志**必须提交**，不要忽略！

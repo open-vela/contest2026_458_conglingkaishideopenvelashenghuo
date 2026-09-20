@@ -1,0 +1,29 @@
+{
+  "schema_version": "1.0",
+  "team_id": "contest2026_458_conglingkaishideopenvelashenghuo",
+  "github_login": "yilives",
+  "generator": "mimocode",
+  "sessions": [
+    {
+      "session_id": "4708967e-15a2-4030-aaaa-9281c51db74e",
+      "tool": "mimocode",
+      "started_at": "2026-09-17T12:22:05.798Z",
+      "last_event_at": "2026-09-20T15:11:47.998Z",
+      "event_count": 3961,
+      "file_path": "logs/yilives/2026-09-17/mimocode__4708967e-15a2-4030-aaaa-9281c51db74e.jsonl",
+      "collection_mode": "cli",
+      "health": "ok"
+    },
+    {
+      "session_id": "ab4c7d38-6ef5-40e4-8e5d-3b99241ebc76",
+      "tool": "mimocode",
+      "started_at": "2026-09-20T14:56:04.537Z",
+      "last_event_at": "2026-09-20T15:12:08.838Z",
+      "event_count": 214,
+      "file_path": "logs/yilives/2026-09-20/mimocode__ab4c7d38-6ef5-40e4-8e5d-3b99241ebc76.jsonl",
+      "collection_mode": "cli",
+      "health": "ok"
+    }
+  ],
+  "updated_at": "2026-09-20T15:12:11.142232+00:00"
+}

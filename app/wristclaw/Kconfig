@@ -1,0 +1,35 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+config LVX_USE_DEMO_CONTEST2026_458_WRISTCLAW
+	bool "Contest 2026 team 458 WristClaw agent"
+	default n
+	---help---
+		Enable the WristClaw on-device AI agent (team 458).
+
+		WristClaw runs an intent router with local tool fallback, a
+		proactive reminder engine, a persistent memory store and
+		hook-based skills, talking to the cloud relay over the
+		frame protocol defined in wc_proto.h (/dev/ttyACM0).
+
+if LVX_USE_DEMO_CONTEST2026_458_WRISTCLAW
+
+config WRISTCLAW_DEVICE
+	string "Frame-protocol character device"
+	default "/dev/ttyACM0"
+	---help---
+		Device the wristclaw agent reads and writes protocol frames
+		on.  On the SF32LB52-DevKit-LCD nsh build this is the USB
+		CDC-ACM gadget port.
+
+config WRISTCLAW_PRIORITY
+	int "Wristclaw agent task priority"
+	default 100
+
+config WRISTCLAW_STACKSIZE
+	int "Wristclaw agent task stack size (bytes)"
+	default 16384
+
+endif

@@ -1,36 +1,76 @@
-# contest2026_458_conglingkaishideopenvelashenghuo
+# 腕灵犀 WristClaw —— 端云协同的腕上 AI 伙伴
 
-👋 欢迎参加 **2026 首届 openvela AI 硬件开发者大赛**！
+> 2026 首届 openvela AI 硬件开发者大赛 · 队伍 `contest2026_458_conglingkaishideopenvelashenghuo` · 选题：AI 硬件产品创新（主）+ 手表应用创新
 
-这是组委会为你的队伍创建的**专属参赛仓库**（本仓为样例/模板，队伍编号 `458`；你看到的将是你自己的 `contest2026_<编号>_<队伍名>`）。比赛期间，你的全部参赛代码、打包产物与 AI Coding 日志都提交到这里。
+**一句话**：把「智能体」放进一块 openvela 手表开发板 —— 断网也能执行高频指令，联网时由云端大模型补上开放域理解；喊一句「你好 openvela」就能说话，设备还会主动提醒你。
 
-> 本仓既是「代码仓」，又内置了一键拉取整套 openvela 工程的 `repo` 清单（manifest）。你只需跟它打交道，**自始至终只动一个文件夹**。
-
----
-
-## 一、先读这些官方文档
-
-**通用（所有赛道必读）：**
-
-| 文档                                                                                                                                     | 用途                                           |
-| ---------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [《大赛总览》](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/contest_overview.md)                        | 赛道、流程、评分、资源，建议先通读             |
-| [《参赛代码提交指南》](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/code_submission_guide.md)           | 仓库获取、提交流程、时间与权限（**以此为准**） |
-| [《AI Coding 日志归集与提交手册》](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/ai_coding_log_guide.md) | 如何导出 AI 对话日志并提交到 `logs/`           |
-
-**按你的赛道选读（三选一）：**
-
-| 赛道                  | 教程导航                                                                                                                                                 |
-| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 快应用 / 手表应用创新 | [快应用教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/quickapp/quickapp_guide_index.md)                         |
-| AI 硬件产品创新       | [AI 硬件赛道教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/ai_hardware/ai_hardware_guide_index.md)              |
-| 新硬件适配            | [新硬件适配赛道教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/hardware_porting/hardware_porting_guide_index.md) |
+| 关键指标 | 实测结果 |
+| --- | --- |
+| 端到端自动化用例 | **7/7 通过**（提醒 / 备忘 / 状态 / 云端上行 / 云端回复 / Skill 热安装 / 心跳） |
+| 协议互操作 | C ↔ Python 双向逐字节一致（含坏帧重同步） |
+| 唤醒词 | 「**你好，openvela**」（赛道统一要求，离线 Vosk 本地识别） |
+| openvela 能力落地 | **图形**（LVGL 9.2 三页手表 UI，触摸滑动）、设备节点（CDC-ACM / RTC / PWM 背光 / NSH） |
+| 中文显示 | 自生成 GB2312 全量位图字体（6763 汉字 + 全量 ASCII，约 930KB，XIP 直读不占 RAM） |
 
 ---
 
-## 二、第一步：拉取完整工程
+## 一、作品简介
 
-用组委会提供的命令一键拉取「openvela 全量源码 + 你的专属仓」：
+腕灵犀是一套**端云协同**的腕上 AI 伙伴，两端一体：
+
+- **板端（openvela / NuttX，本仓 `app/wristclaw/`）**：常驻 Agent 单线程承载
+  「链路收发 → 三级意图路由 → 工具执行 → 主动引擎 → LVGL UI」。
+  高频指令（提醒 / 备忘 / 时间 / 亮度 / 状态）在端侧闭环执行，**断网照样能用**。
+- **网关端（PC，本仓 `host/`）**：全局语音唤醒（离线 Vosk 常驻监听
+  「你好 openvela」）→ 录音 → ASR → 经自研帧协议下发；同时负责接云端大模型
+  （按大赛 MiMo 的 OpenAI 兼容形式封装，无 Key 时降级为本地 Mock）。
+
+**核心设计取向**：端侧负责"确定性地执行"，云端负责"听懂与生成"。
+主动能力（到点推送、久坐提醒、待办积压建议）放在端侧常驻 Agent，
+让设备从"问答工具"变成"会主动关心人的伙伴"；且**只基于真实运行状态触发**，
+不做虚假传感器数据演示。
+
+---
+
+## 二、仓库结构
+
+```text
+contest2026_458_conglingkaishideopenvelashenghuo/
+├── app/wristclaw/            # ★ 板端 openvela 应用（纯 C，四模块 + 自生成字体）
+│   ├── wristclaw_main.c      #   主循环：链路 tick / 收帧 / 主动引擎 / UI 驱动
+│   ├── wc_agent.c            #   意图路由 / 工具 / 主动引擎 / 记忆 / Skill 加载
+│   ├── wc_proto.c(.h)        #   帧协议 + 有界写入（忙丢帧、保链路）
+│   ├── wc_ui.c(.h)           #   LVGL 手表 UI（表盘 / 对话 / 提醒三页）
+│   └── wc_font_16.h          #   自生成 CJK 位图字体（生成脚本见 tests/）
+├── board/contest_board/      # 板级适配说明 + 实机使用的 defconfig（逐字复制）
+├── host/                     # ★ PC 网关：单一程序 GUI + 命令行桥 + 协议实现
+│   ├── app.py                #   GUI 上位机（推荐入口）
+│   ├── 腕灵犀上位机.bat       #   双击启动
+│   ├── bridge.py  wake.py    #   命令行桥 / 离线唤醒
+│   └── wristclaw/            #   protocol.py（与板端逐字节一致的帧协议）…
+├── tests/                    # 复现与验收脚本（协议互操作、端到端、校时、烧录校验）
+├── tools/                    # 交付工具链（报告/海报渲染、日志导出）
+│   ├── export_logs.py        #   从本机真实 transcript 导出 AI Coding 日志
+│   ├── docx2html.py          #   报告 docx → HTML → PDF（无 Word 环境下的排版链）
+│   ├── fix_report.py         #   报告事实性勘误
+│   ├── poster.html           #   作品海报源文件
+│   └── render_poster.py      #   海报 → PNG / JPG / PDF
+├── docs/                     # 方案、架构、演示手册、构建复现
+│   ├── PLAN.md  ARCHITECTURE.md  DEMO.md  BUILD.md
+│   └── submission/           # ★ 提交材料：技术报告 docx/pdf、海报 pdf/jpg
+├── logs/                     # AI Coding 日志（工具真实会话导出，请勿手改）
+└── README.md  LICENSE        # 作品说明 / Apache-2.0
+```
+
+> 组委会模板的 manifest 会把 `app/wristclaw` 软链到编译树的
+> `packages/demos/contest2026_458_wristclaw`。本仓同时给出**已验证的**
+> 构建方式（见 `docs/BUILD.md`），两条路径都能编译。
+
+---
+
+## 三、快速开始
+
+### 1. 拉取工程
 
 ```bash
 repo init -u https://github.com/open-vela/contest2026_458_conglingkaishideopenvelashenghuo \
@@ -38,111 +78,162 @@ repo init -u https://github.com/open-vela/contest2026_458_conglingkaishideopenve
 repo sync -c -j8
 ```
 
-同步后，你的整个仓库位于工作区的 `contest2026_458_conglingkaishideopenvelashenghuo/`，openvela 全量源码在外层（`nuttx/`、`apps/`、`packages/`、`vendor/` 等）。
+### 2. 构建固件
 
----
-
-## 三、第二步：在哪里写代码
-
-**只在自己的仓目录 `contest2026_458_conglingkaishideopenvelashenghuo/` 里开发。** 不同作品形态放在对应子目录，manifest 会通过 `<linkfile>` 把它们**软链**到 openvela 编译树该在的位置——你不用手动 copy：
-
-| 作品形态 | 你的代码放这里             | 系统自动映射到                                 |
-| -------- | -------------------------- | ---------------------------------------------- |
-| 应用     | `app/hello_app/`           | `packages/demos/contest2026_458_hello_app`     |
-| 快应用   | `quickapp/hello_quickapp/` | `packages/apps/contest2026_458_hello_quickapp` |
-| 板级适配 | `board/contest_board/`     | `vendor/openvela/boards/contest2026_458_board` |
-
-> 用不到的形态目录可以删掉；新增作品时按同样规则加子目录，并在 `contest2026_458_conglingkaishideopenvelashenghuo.xml` 里补一条 `<linkfile>` 映射即可。**生产仓库（packages/nuttx/vendor 等）零改动。**
-
-建议仓库目录约定（便于评委定位）：
-
-```text
-app/ | quickapp/ | board/   # 你的作品代码
-logs/                       # AI Coding 日志（主动导出后提交，格式见 logs/README.md）
-README.md                   # 作品说明（提交前请改成你自己的，见第六节）
-```
-
-> 仓内附带了一个 `.gitignore.example`，给出了**编译产物**等不需要进仓的文件示例。如需启用，`cp .gitignore.example .gitignore` 后按需增删即可。**注意 `logs/` 下最终导出的 AI Coding 日志必须提交，不要忽略。**
->
-> `logs/` 的目录结构与提交格式见 [logs/README.md](logs/README.md)。
-
----
-
-## 四、第三步：编译与运行
-
-编译/运行步骤随作品形态不同而不同，请参考你所在赛道的教程导航：
-
-- 快应用 / 手表应用：[快应用教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/quickapp/quickapp_guide_index.md)（含模拟器与开发板部署）。
-- AI 硬件产品创新：[AI 硬件赛道教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/ai_hardware/ai_hardware_guide_index.md)（环境搭建、编译烧录、Skill 开发）。
-- 新硬件适配：[新硬件适配赛道教程导航](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/hardware_porting/hardware_porting_guide_index.md)（BSP 移植、最小 NSH 基线）。
-
-子目录已通过 manifest 中的 `<linkfile>` 软链进 openvela 编译树，因此构建在 openvela 工作区**根目录**（即你这个仓的上一级）进行。openvela 使用 `build.sh` 作为统一入口，接收一个 **board config 路径**作为参数：
+目标板是 **SF32LB52-DevKit-LCD**（openvela 的 SiFli vendor 层已提供板级支持）。
 
 ```bash
-# 进入 openvela 工作区根目录（你的仓的上一级）
-cd ..
+# 应用放进编译树（与我们实机验证一致的路径）
+cp -r contest2026_458_*/app/wristclaw apps/examples/wristclaw
 
-# 通用语法：第一个参数是 board config 路径，第二个参数可以是 menuconfig / distclean 等
-./build.sh <board-config-path> [menuconfig|distclean] [-j8]
+# 启用应用（defconfig 加一行）
+echo "CONFIG_LVX_USE_DEMO_CONTEST2026_458_WRISTCLAW=y" >> \
+     vendor/sifli/boards/sf32lb52/sf32lb52_devkit_lcd/configs/nsh/defconfig
+
+cd nuttx && cmake -B cmake_out/sf32lb52_devkit_lcd \
+     -DBOARD_CONFIG=../vendor/sifli/boards/sf32lb52/sf32lb52_devkit_lcd/configs/nsh
+ninja -C cmake_out/sf32lb52_devkit_lcd nuttx.bin
 ```
 
-> 具体的 board config 路径、目标产物、模拟器/真机部署方式请以你所在赛道的教程导航为准。本仓 `app/` `quickapp/` `board/` 三个示例骨架对应的 Kconfig 选项可通过 `menuconfig` 启用。
+> 完整、可复制的构建/烧录步骤（含 CMake 缓存陷阱、Kconfig 汇总不重生成、
+> USB 端点方向硬约束等实测坑）见 **[docs/BUILD.md](docs/BUILD.md)**。
 
----
+### 3. 烧录
 
-## 五、第四步：提交作品
-
-1. **fork** 你的专属仓 → 开发 → `git commit` 并推送 → 向专属仓发起 **Pull Request**，可**自行 review 并合入**（无需等组委会）。
-2. **AI Coding 日志**：与 AI 工具的对话会自动记录到本机 staging（不会自动上传），需你**主动导出/打包**选定会话到仓内 `logs/` 目录后一并提交。详见[《AI Coding 日志归集与提交手册》](https://github.com/open-vela/docs/blob/dev-ai-contest-2026/zh-cn/contest_2026/ai_coding_log_guide.md)。
-3. 若需改动 **nuttx 等公共仓库**，不在本仓改，而是 fork 对应公共仓、以 PR 提交到 `dev-ai-contest-2026` 分支，由组委会 review 后合入。
-
-> ⏰ **提交作品截止：9 月 20 日**。截止后统一收回 push 权限，仍可查看 / clone。
->
-> 获奖后再按要求将作品 PR 至 openvela 上游对应仓库（走标准 PR + CI 流程）。
-
-### 关于 PR 与 CLA
-
-- 本仓所有改动通过 **Pull Request** 合入（分支保护强制，可自行合入自己的 PR）。
-- 首次贡献需在[**官网签署 CLA**](https://openvela.com/#/community/cla)；PR 上会自动跑 `cla/signature` 检查，在官网签署成功后，在 PR 评论 `/check-cla` 复检即可通过。
-
----
-
-## 六、提交前：把本 README 改成你的作品说明
-
-本文件目前是组委会给的**使用说明书**。**作品提交前，请把它替换成你自己作品的说明**，方便评委快速了解你做了什么、怎么跑起来。建议至少包含以下内容：
-
-```markdown
-# <你的作品名>
-
-## 一、作品简介
-<一句话/一段话说明这个作品是什么、解决什么问题、亮点在哪>
-
-## 二、选题方向
-<快应用 / 手表应用创新 ｜ AI 硬件产品创新 ｜ 新硬件适配 ｜ 自定方向，并简述理由>
-
-## 三、目录结构
-<列出你这个仓里各目录/文件的作用，例如：>
-- `app/xxx/`        — <说明>
-- `board/xxx/`      — <说明>
-- `quickapp/xxx/`   — <说明>
-- `logs/`           — AI Coding 日志
-- `docs/` 或其他    — <说明>
-
-## 四、运行方式
-<拉取工程后，如何编译、烧录/部署、运行的完整步骤；最好能让评委照着一步步复现>
-
-## 五、AI Coding 使用说明
-<说明本作品如何借助 AI 辅助开发：
-- 在需求拆解 / 方案设计 / 编码 / 调试 / 文档等环节如何与 AI 协作；
-- AI 对开发效率或质量带来的实际帮助。
-完整对话日志见 logs/ 目录>
+```bash
+sftool -c SF32LB52 -p COM8 -b 1000000 --before default_reset --after soft_reset \
+       write_flash nuttx/cmake_out/sf32lb52_devkit_lcd/nuttx.bin@0x12010000
 ```
 
-> 提示：将会根据「作品本身 + 你的 README 说明 + `logs/` 里的 AI Coding 日志」来理解和评估你的作品，README 写清楚很重要。
+- `COM8` = 板载 CH9102 调试串口（控制台 + 烧录）。**RTS 接整板供电开关**，
+  拉一下等价断电重上电。
+- `COM10` = 片内 USB CDC 数据口（跑帧协议）。
+
+### 4. 运行
+
+```bash
+# ① 先启动上位机（关键：主机必须先持有 COM10，板端 open() 才能成功）
+cd contest2026_458_*/host && python app.py        # 或双击「腕灵犀上位机.bat」
+
+# ② 再在板端 NSH 控制台启动 Agent
+nsh> wristclaw &
+```
+
+启动后：上位机点「连接」→ 板端打印 `link up on /dev/ttyACM0` → 自动校时
+（表盘从 `--:--` 变成正确时间）→ 自动推送 Skill。然后在输入框打字（或勾选
+「语音唤醒」说「你好 openvela」）即可对话。
+
+### 5. 自测
+
+```bash
+cd tests
+python test_e2e2.py     # 端到端 7 用例（自动开端口、启 app、双通道日志）
+python test_time2.py    # 校时链路（主机持口 → 启动 app → TIME → 现在几点）
+```
 
 ---
 
-## 附：仓库命名规范
+## 四、功能与实测结果
 
-`contest2026_<编号>_<队伍名>` — 编号三位零填充；队名 slug（全小写、英文/拼音、连字符）。例：`contest2026_458_conglingkaishideopenvelashenghuo`。
-（仓库由组委会统一创建，**每队仅一个仓**，无需自行命名。）
+| 能力 | 状态 | 实测证据 |
+| --- | --- | --- |
+| 本地提醒（含到点主动推送 + 屏幕弹卡） | ✅ | 「提醒我 5 秒后测试提醒」→「好的，5 秒后提醒你…」→ 5 秒后主动推送 |
+| 本地备忘（持久化，重启可读） | ✅ | 写入 `/data/wristclaw/memos.txt`，重启后 `memos=N` 恢复 |
+| 状态 / 时间查询 | ✅ | 「现在是 2026-09-20 22:43:21」与上位机一致 |
+| 云端上行 / 云端回复闭环 | ✅ | CLOUD_REQ(0x04) ↔ CLOUD_RESP(0x05) |
+| Skill 热安装（≥1 个，硬性要求） | ✅ | `SKILL name\|triggers\|tool\|prompt` → 落盘 + 热加载，本仓带 2 个示例 |
+| 心跳与在线判定 | ✅ | 3s 周期 HEARTBEAT(0x0A) ↔ ACK(0x09) |
+| 校时（板端无 RTC 备份电池） | ✅ | `TIME <epoch> <时区分钟>`；未校时显示 `--:--` |
+| 手表 UI（表盘 / 对话 / 提醒） | ✅ | LVGL 9.2 tileview，触摸左右滑动，CJK 全量字体 |
+| 端侧唤醒词 / 板载录音放音 | ❌ 本期未实现 | 硬件齐备，缺 openvela/NuttX 侧音频驱动（见 `docs/DEMO.md` 第十节） |
+| BLE 组网 | ❌ 按计划延后 | 本期用 USB CDC 直连 |
+
+---
+
+## 五、已知限制（如实说明）
+
+1. **端侧音频未打通**：`CONFIG_AUDIO` 未开、板级无音频驱动、NuttX 侧无下层
+   胶水层，HAL 的 `bf0_hal_audcodec.c` 还被 CMake 排除在编译之外。故「听/说」
+   由 PC 网关完成，端侧负责理解、执行与显示。**这是赛期首要迭代项。**
+2. **云端大模型需自备 Key**：`host/` 已按 OpenAI 兼容接口封装（`--api-key`），
+   无 Key 时自动降级为本地 Mock，保证离线自测与演示可跑。
+3. **中文覆盖为 GB2312 全量**（6763 汉字），生僻字/古字仍可能缺字形。
+4. **唤醒准确率未做量化评测**（安静环境下听感稳定触发）。
+5. 板载 USB 为全速（实测 `POWER.HSMODE` 恒为 0），链路约 1 MB/s 量级。
+
+---
+
+## 六、提交材料对照
+
+大赛模板（`2026 首届 openvela AI 硬件开发者大赛 · 作品提交模板`）第一节列出的清单：
+
+| 序号 | 材料 | 提交要求 | 位置 / 状态 |
+| --- | --- | --- | --- |
+| 1 | 技术报告（.pdf / .docx） | **必交** | `docs/submission/腕灵犀WristClaw-技术报告.docx` / `.pdf` ✅ |
+| 2 | 演示视频（≤5 分钟） | **必交** | ⬜ 待录制（分镜脚本见 §六-1） |
+| 3 | 作品展示照片（前/后/侧/俯视） | 可选（涉及硬件实物则需提交） | ⬜ 待拍摄（清单见 §六-2） |
+| 4 | 海报（.pdf / .jpg / .pptx） | 可选（入围决赛 / 线下展示） | `docs/submission/WristClaw-海报.*` ✅ |
+| 5 | 答辩 PPT（.pptx） | 可选（入围决赛） | ⬜ 入围后制作 |
+| — | 项目源码 + AI Coding 日志 | **本仓，评审直接 clone 验证** | `app/`、`host/`、`tests/`、`docs/`、`logs/` ✅ |
+
+提交包命名规则：`<队伍名称>-<作品名称>-<仓库名称>.zip`，本队为
+
+```text
+从零开始的openvela生活-腕灵犀WristClaw-contest2026_458_conglingkaishideopenvelashenghuo.zip
+```
+
+> 源码与日志**不进压缩包**——评审直接 clone 本仓编译运行验证。
+
+### 六-1、演示视频分镜（约 3 分 40 秒）
+
+| 时间 | 画面 | 旁白要点 |
+| --- | --- | --- |
+| 0:00–0:20 | 作品全景：开发板亮屏、表盘页走针 | 一句话定位：断网也能执行、联网更聪明的腕上 AI 伙伴 |
+| 0:20–0:50 | 上位机 GUI「连接」→ 板端控制台 `link up` → 表盘从 `--:--` 跳到正确时间 | 端云建链与校时；强调**先开主机端口再启板端 app** 的稳定顺序 |
+| 0:50–1:40 | 说「你好 openvela」→ 提示音 →「提醒我 1 分钟后喝水」 | 语速放慢、字幕打出发音；板端立即回 `好的，60 秒后提醒你…` |
+| 1:40–2:10 | **拔掉/停掉上位机**，再说「记一下 明天带水杯」→ 板端照样执行 | 断网自治：本地规则闭环，云端不可达时明确提示离线可用能力 |
+| 2:10–2:50 | 1 分钟到点，屏幕**主动**弹卡 + 上位机打印 REMINDER | 主动引擎：到点推送、久坐提醒、待办积压建议，且只基于真实状态触发 |
+| 2:50–3:20 | 在 `bridge.py` 输入 `SKILL weather\|天气,下雨\|cloud\|…` → `SKILLS` 列出 | Skill 热安装：Markdown 定义、运行时落盘，**无需重烧固件** |
+| 3:20–3:40 | 手指左右滑动三页 UI（表盘 / 对话 / 提醒） | openvela 图形能力：LVGL 9.2、GB2312 全量中文位图字体 |
+
+录制要点：屏幕与上位机同框（画中画）、全程字幕、**不要剪辑掉失败重试片段**（评委会
+看真实度）；结尾打出仓库地址。
+
+### 六-2、作品展示照片清单
+
+硬件实物：SF32LB52-DevKit-LCD（390×450 AMOLED + 电容触摸），**两条 USB 线**
+（CH9102 调试口 + 片内 CDC）。
+
+| 文件名 | 角度 / 内容 |
+| --- | --- |
+| `01-前视.jpg` | 正面平视，屏幕点亮停在表盘页 |
+| `02-后视.jpg` | 背面，展示丝印与接口 |
+| `03-侧视.jpg` | 侧面，展示 USB 双线接法与厚度 |
+| `04-俯视.jpg` | 俯视 45°，屏幕内容清晰可读 |
+| `05-交互.jpg` | 手指触摸滑动切页的瞬间 |
+| `06-提醒弹卡.jpg` | 提醒到点时的屏幕特写（体现主动推送） |
+| `07-连线全貌.jpg` | 板子 + PC 上位机同框，体现端云两端一体 |
+
+要求：白底或深色纯色背景、均匀打光、避免屏幕反光；横构图 3:2，长边 ≥ 3000px。
+
+---
+
+## 七、文档索引
+
+| 文档 | 内容 |
+| --- | --- |
+| [docs/PLAN.md](docs/PLAN.md) | 方案设计、取舍论证、实现状态、开发中定位的真实缺陷 |
+| [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) | 端云分工、帧格式与行协议、建链/交互/校时时序、可靠性策略 |
+| [docs/DEMO.md](docs/DEMO.md) | 演示脚本、操作步骤、故障 FAQ、音频实测结论 |
+| [docs/BUILD.md](docs/BUILD.md) | 构建与烧录复现（含所有踩过的坑） |
+| [tests/README.md](tests/README.md) | 验收脚本说明与结果 |
+| [host/README.md](host/README.md) | 上位机（GUI / 命令行 / 唤醒）使用说明 |
+| [logs/README.md](logs/README.md) | AI Coding 日志格式与导出方式（可复现） |
+| [docs/submission/](docs/submission/) | 提交材料：技术报告（docx / pdf）、作品海报（pdf / jpg） |
+
+---
+
+## 八、许可
+
+本项目遵循 **Apache License 2.0**（见 [LICENSE](LICENSE)）。
+第三方组件（openvela/NuttX、LVGL、Vosk 模型等）遵循其各自许可。
