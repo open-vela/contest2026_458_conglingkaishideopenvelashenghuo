@@ -1,0 +1,19 @@
+# 明确行尾，避免 Windows 检出后 .sh / .py 带 CRLF 在 Linux/WSL 下无法执行
+* text=auto
+*.sh   text eol=lf
+*.py   text eol=lf
+*.c    text eol=lf
+*.h    text eol=lf
+*.js   text eol=lf
+*.md   text eol=lf
+*.json text eol=lf
+*.txt  text eol=lf
+*.xml  text eol=lf
+
+# 二进制，不要做行尾转换
+*.png  binary
+*.jpg  binary
+*.pdf  binary
+*.docx binary
+*.bin  binary
+*.jsonl -text
