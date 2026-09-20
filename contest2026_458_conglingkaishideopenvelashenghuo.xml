@@ -10,6 +10,7 @@
 
   <project path="contest2026_458_conglingkaishideopenvelashenghuo" name="contest2026_458_conglingkaishideopenvelashenghuo">
     <linkfile src="app/hello_app" dest="packages/demos/contest2026_458_hello_app"/>
+    <linkfile src="app/wristclaw" dest="packages/demos/contest2026_458_wristclaw"/>
     <linkfile src="quickapp/hello_quickapp" dest="packages/apps/contest2026_458_hello_quickapp"/>
     <linkfile src="board/contest_board" dest="vendor/openvela/boards/contest2026_458_board"/>
   </project>

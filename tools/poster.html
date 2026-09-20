@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>腕灵犀 WristClaw 海报</title>
+<style>
+  @page { size: A2 portrait; margin: 0; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root{
+    --bg:#06090b; --panel:#141a1c; --accent:#26d0ce;
+    --text:#ececec; --dim:#8a8a8a; --user:#1e5f5c;
+    --line:#26343a; --deep:#0a0e10;
+  }
+  html{ background:#06090b; }
+  body{
+    width:1587px; min-height:2245px; margin:0 auto;
+    font-family:"Microsoft YaHei","PingFang SC","Source Han Sans SC",sans-serif;
+    background:
+      radial-gradient(1200px 700px at 15% 0%, #10262b 0%, transparent 60%),
+      radial-gradient(1000px 600px at 95% 12%, #16303a 0%, transparent 55%),
+      var(--bg);
+    color:var(--text); padding:48px 52px 40px 52px;
+  }
+  .conf{ font-size:19px; letter-spacing:2px; color:var(--accent);
+    text-transform:uppercase; }
+  h1{ font-size:104px; line-height:1.02; letter-spacing:3px; margin-top:14px;
+    font-weight:800;
+    background:linear-gradient(96deg,#ffffff 8%,#9ff3f1 52%,#26d0ce 100%);
+    -webkit-background-clip:text; background-clip:text; color:transparent; }
+  h1 small{ font-size:44px; font-weight:600; letter-spacing:1px;
+    -webkit-text-fill-color:#8ad9d7; }
+  .tag{ font-size:29px; color:#cfdde0; margin-top:16px; line-height:1.5; }
+  .tag b{ color:var(--accent); }
+  .team{ font-size:18px; color:var(--dim); margin-top:14px;
+    border-top:1px solid var(--line); padding-top:12px; }
+
+  .kpis{ display:grid; grid-template-columns:repeat(4,1fr); gap:18px;
+    margin-top:30px; }
+  .kpi{ background:linear-gradient(160deg,#101c20 0%,#0b1215 100%);
+    border:1px solid #1e3a40; border-radius:16px; padding:20px 22px; }
+  .kpi .n{ font-size:52px; font-weight:800; color:var(--accent);
+    line-height:1.05; }
+  .kpi .n i{ font-size:24px; font-style:normal; color:#7fb7b6; }
+  .kpi .l{ font-size:18px; color:#c3d2d6; margin-top:8px; line-height:1.45; }
+  .kpi .s{ font-size:15px; color:var(--dim); margin-top:5px; }
+
+  h2{ font-size:28px; color:#fff; margin-bottom:16px; display:flex;
+    align-items:center; gap:12px; }
+  h2::before{ content:''; width:6px; height:26px; border-radius:3px;
+    background:var(--accent); }
+
+  .cols{ display:grid; grid-template-columns:1fr 1010px; gap:34px;
+    margin-top:36px; }
+  .card{ background:#0c1417; border:1px solid var(--line); border-radius:16px;
+    padding:24px 26px; margin-bottom:20px; }
+  .card h3{ font-size:21px; color:var(--accent); margin-bottom:10px; }
+  .card p{ font-size:18px; line-height:1.66; color:#cfdde0; }
+  .card p + p{ margin-top:8px; }
+  .card b{ color:#fff; }
+  .pain li{ list-style:none; font-size:18px; line-height:1.7; color:#cfdde0; }
+  .pain li::before{ content:'✕'; color:#e07a7a; font-weight:700;
+    margin-right:10px; }
+  .gain li{ list-style:none; font-size:18px; line-height:1.7; color:#cfdde0; }
+  .gain li::before{ content:'✓'; color:var(--accent); font-weight:700;
+    margin-right:10px; }
+
+  .screens{ display:flex; gap:30px; justify-content:center; }
+  .screen{ text-align:center; }
+  .screen .cap{ font-size:20px; color:#cfdde0; margin-top:14px; }
+  .screen .cap em{ font-style:normal; color:var(--dim); font-size:16px;
+    display:block; margin-top:3px; }
+
+  .arch{ margin-top:36px; background:#0a1215; border:1px solid var(--line);
+    border-radius:18px; padding:26px 30px 20px 30px; }
+  table{ width:100%; border-collapse:collapse; font-size:17px; }
+  th,td{ border:1px solid #22373d; padding:9px 12px; text-align:left; }
+  th{ background:#12262b; color:var(--accent); font-weight:600; }
+  td b{ color:#fff; }
+  footer{ margin-top:30px; border-top:1px solid var(--line); padding-top:18px;
+    display:flex; justify-content:space-between; font-size:17px;
+    color:var(--dim); }
+  footer b{ color:#bcd0d4; }
+</style>
+</head>
+<body>
+
+<div class="conf">2026 首届 openvela AI 硬件开发者大赛 · AI 硬件产品创新 ＋ 手表应用创新</div>
+<h1>腕灵犀 <small>WristClaw</small></h1>
+<div class="tag">
+  端云协同的腕上 AI 伙伴 —— <b>断网也能执行</b>高频指令，<b>联网时云端大模型</b>补上开放域理解，
+  而且设备会<b>主动关心你</b>：到点推送、久坐提醒、待办积压建议。
+  说一句「<b>你好，openvela</b>」就能对话。
+</div>
+<div class="team">
+  队伍：从零开始的 openvela 生活 ｜ 仓库：contest2026_458_conglingkaishideopenvelashenghuo ｜
+  硬件：SF32LB52-DevKit-LCD（390×450 AMOLED + 电容触摸）· openvela / NuttX
+</div>
+
+<div class="kpis">
+  <div class="kpi">
+    <div class="n">7<i>/7</i></div>
+    <div class="l">端到端自动化用例通过</div>
+    <div class="s">提醒 · 备忘 · 状态 · 云端回环 · Skill · 心跳</div>
+  </div>
+  <div class="kpi">
+    <div class="n">&lt;50<i>ms</i></div>
+    <div class="l">本地指令响应（断网可用）</div>
+    <div class="s">CDC 全速链路，心跳 3s、空闲 &lt;1KB/s</div>
+  </div>
+  <div class="kpi">
+    <div class="n">6763<i>字</i></div>
+    <div class="l">自生成 GB2312 全量位图字体</div>
+    <div class="s">约 930KB，XIP 直读不占 RAM，无方框字</div>
+  </div>
+  <div class="kpi">
+    <div class="n">2<i>个</i></div>
+    <div class="l">自定义 Skill，Markdown 定义热加载</div>
+    <div class="s">weather / standup，无需重烧固件</div>
+  </div>
+</div>
+
+<div class="cols">
+  <div class="left">
+    <div class="card">
+      <h3>要解决的问题</h3>
+      <ul class="pain">
+        <li>可穿戴语音助手<b>一断网就完全失效</b></li>
+        <li>只能「问一句答一句」，<b>没有主动关怀</b></li>
+        <li>端侧塞语音栈，算力与功耗都吃不下</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>我们的路线：端云职责切分</h3>
+      <ul class="gain">
+        <li><b>端侧（openvela/NuttX）</b>：确定性地执行。三级意图路由 + 5 项工具 + 主动引擎 + 记忆持久化，全部在 16K 栈的单任务内闭环，<b>零算力、零联网依赖</b>。</li>
+        <li><b>云端（PC 网关）</b>：负责听懂与生成。离线 Vosk 全局唤醒 + ASR，大模型按 OpenAI 兼容接口对接大赛 MiMo，无 Key 时降级本地 Mock，演示不会开天窗。</li>
+        <li><b>断网降级</b>：本地规则照常可用，云端不可达时明确提示「离线可用：提醒/备忘/时间/亮度/状态」，<b>绝不静默无响应</b>。</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>四个创新点</h3>
+      <p><b>① 端云职责切分</b>：端侧保证「断网也能执行」，云端负责「听懂与生成」。</p>
+      <p><b>② Skill 热加载</b>：新能力以 Markdown 定义运行时热安装到板端
+        <code>/data/agent/skills/</code>，<b>不重烧固件即可扩展</b>。</p>
+      <p><b>③ 主动引擎</b>：到点推送 / 久坐提醒 / 待办积压建议，且<b>只基于真实运行状态触发</b>，
+        不做虚假传感器数据演示。</p>
+      <p><b>④ 自研二进制帧协议</b>：CRC16-CCITT 校验 + 流式坏帧重同步 +
+        有界写入（忙时丢帧保链路），板端 C 与上位机 Python <b>逐字节互操作验证</b>。</p>
+    </div>
+  </div>
+
+  <div class="right">
+    <h2>手表端 UI（LVGL 9.2，触摸左右滑动）</h2>
+    <div class="screens">
+
+      <!-- ===== 页0 表盘 ===== -->
+      <div class="screen">
+        <svg width="320" height="369" viewBox="0 0 390 450">
+          <rect x="0" y="0" width="390" height="450" rx="26" fill="#000000"/>
+          <rect x="0" y="0" width="390" height="34" fill="#000000"/>
+          <text x="16" y="23" font-size="16" fill="#26d0ce"
+                font-family="Segoe UI Symbol, sans-serif">⌨ 已连接</text>
+          <circle cx="352" cy="17" r="4" fill="#26d0ce"/>
+          <circle cx="338" cy="17" r="4" fill="#404040"/>
+          <circle cx="324" cy="17" r="4" fill="#404040"/>
+          <!-- 表盘 -->
+          <circle cx="195" cy="127" r="122" fill="#0a0e10" stroke="#1e2a2e"
+                  stroke-width="3"/>
+          <g stroke="#3e4a4e" stroke-width="1">
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(6 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(12 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(18 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(24 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(36 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(42 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(48 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(54 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(66 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(72 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(78 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(84 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(96 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(102 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(108 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(114 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(126 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(132 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(138 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(144 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(156 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(162 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(168 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(174 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(186 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(192 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(198 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(204 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(216 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(222 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(228 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(234 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(246 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(252 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(258 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(264 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(276 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(282 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(288 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(294 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(306 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(312 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(318 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(324 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(336 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(342 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(348 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="15" transform="rotate(354 195 127)"/>
+          </g>
+          <g stroke="#d8e4e8" stroke-width="2">
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(0 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(30 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(60 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(90 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(120 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(150 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(180 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(210 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(240 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(270 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(300 195 127)"/>
+            <line x1="195" y1="10" x2="195" y2="20" transform="rotate(330 195 127)"/>
+          </g>
+          <g fill="#b8c4c8" font-size="17" text-anchor="middle"
+             font-family="Segoe UI, sans-serif">
+            <text x="195" y="42">12</text>
+            <text x="272" y="66">1</text><text x="327" y="116">2</text>
+            <text x="348" y="133">3</text><text x="327" y="152">4</text>
+            <text x="272" y="198">5</text><text x="195" y="222">6</text>
+            <text x="118" y="198">7</text><text x="62" y="152">8</text>
+            <text x="41" y="133">9</text><text x="62" y="116">10</text>
+            <text x="118" y="66">11</text>
+          </g>
+          <!-- 时/分/秒针：22:47:32 -->
+          <line x1="195" y1="127" x2="195" y2="75" stroke="#ececec"
+                stroke-width="5" stroke-linecap="round" transform="rotate(233.5 195 127)"/>
+          <line x1="195" y1="127" x2="195" y2="35" stroke="#ececec"
+                stroke-width="3" stroke-linecap="round" transform="rotate(282 195 127)"/>
+          <line x1="195" y1="127" x2="195" y2="23" stroke="#26d0ce"
+                stroke-width="2" stroke-linecap="round" transform="rotate(192 195 127)"/>
+          <circle cx="195" cy="127" r="5" fill="#26d0ce"/>
+          <!-- 数字时间 / 日期 / 页脚 -->
+          <text x="195" y="288" font-size="46" fill="#ececec" text-anchor="middle"
+                font-family="Segoe UI, sans-serif" font-weight="300">22:47</text>
+          <text x="195" y="322" font-size="19" fill="#8a8a8a" text-anchor="middle">9月20日 星期日</text>
+          <text x="195" y="424" font-size="18" fill="#8a8a8a" text-anchor="middle">提醒 1   备忘 2   Skill 2</text>
+        </svg>
+        <div class="cap">① 表盘<em>模拟表针 + 数字时间 + 状态栏</em></div>
+      </div>
+
+      <!-- ===== 页1 对话 ===== -->
+      <div class="screen">
+        <svg width="320" height="369" viewBox="0 0 390 450">
+          <rect x="0" y="0" width="390" height="450" rx="26" fill="#000000"/>
+          <text x="16" y="23" font-size="16" fill="#26d0ce"
+                font-family="Segoe UI Symbol, sans-serif">⌨ 已连接</text>
+          <circle cx="352" cy="17" r="4" fill="#404040"/>
+          <circle cx="338" cy="17" r="4" fill="#26d0ce"/>
+          <circle cx="324" cy="17" r="4" fill="#404040"/>
+
+          <g font-size="16">
+            <rect x="150" y="46" width="236" height="46" rx="14" fill="#1e5f5c"/>
+            <text x="164" y="75" fill="#ececec">提醒我5秒后测试提醒</text>
+
+            <rect x="4" y="100" width="286" height="68" rx="14" fill="#141a1c"/>
+            <text x="18" y="128" fill="#ececec">好的，5秒后提醒你：</text>
+            <text x="18" y="152" fill="#ececec">提醒我5秒后测试提醒</text>
+
+            <rect x="192" y="176" width="194" height="46" rx="14" fill="#1e5f5c"/>
+            <text x="206" y="205" fill="#ececec">记一下 明天带水杯</text>
+
+            <rect x="4" y="230" width="330" height="68" rx="14" fill="#141a1c"/>
+            <text x="18" y="258" fill="#ececec">记下了（第 2 条备忘）：</text>
+            <text x="18" y="282" fill="#ececec">记一下 明天带水杯</text>
+
+            <rect x="4" y="306" width="300" height="46" rx="14" fill="#141a1c"
+                  stroke="#26d0ce" stroke-width="1.5"/>
+            <text x="18" y="335" fill="#26d0ce">【提醒】提醒我5秒后测试提醒</text>
+
+            <rect x="120" y="360" width="266" height="46" rx="14" fill="#1e5f5c"/>
+            <text x="134" y="389" fill="#ececec">你现在可以休息一下 ☕</text>
+          </g>
+        </svg>
+        <div class="cap">② 对话<em>聊天气泡，保留最近 6 条，自动滚到最新</em></div>
+      </div>
+
+      <!-- ===== 页2 提醒 / 备忘 ===== -->
+      <div class="screen">
+        <svg width="320" height="369" viewBox="0 0 390 450">
+          <rect x="0" y="0" width="390" height="450" rx="26" fill="#000000"/>
+          <text x="16" y="23" font-size="16" fill="#26d0ce"
+                font-family="Segoe UI Symbol, sans-serif">⌨ 已连接</text>
+          <circle cx="352" cy="17" r="4" fill="#404040"/>
+          <circle cx="338" cy="17" r="4" fill="#404040"/>
+          <circle cx="324" cy="17" r="4" fill="#26d0ce"/>
+
+          <text x="12" y="58" font-size="18" fill="#26d0ce">待触发提醒</text>
+          <g>
+            <rect x="12" y="72" width="366" height="52" rx="10" fill="#141a1c"/>
+            <text x="28" y="104" font-size="16" fill="#ececec">🔔  5 秒后：提醒我5秒后测试提醒</text>
+
+            <rect x="12" y="134" width="366" height="52" rx="10" fill="#141a1c"/>
+            <text x="28" y="166" font-size="16" fill="#ececec">🔔  1 分钟后：喝水</text>
+
+            <rect x="12" y="196" width="366" height="52" rx="10" fill="#141a1c"/>
+            <text x="28" y="228" font-size="16" fill="#ececec">🔔  明天 09:00：站会</text>
+          </g>
+
+          <text x="12" y="292" font-size="18" fill="#26d0ce">备忘</text>
+          <text x="16" y="322" font-size="16" fill="#8a8a8a">· 明天带水杯</text>
+          <text x="16" y="350" font-size="16" fill="#8a8a8a">· 周五交周报</text>
+          <text x="16" y="378" font-size="16" fill="#8a8a8a">· 买 Type-C 延长线</text>
+          <text x="195" y="424" font-size="15" fill="#3a4448" text-anchor="middle"
+                >持久化于 /data/wristclaw/，掉电不丢</text>
+        </svg>
+        <div class="cap">③ 提醒 / 备忘<em>卡片式列表，提醒到点弹卡并主动上报</em></div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ===== 系统架构 ===== -->
+<div class="arch">
+  <h2>系统架构与数据流（端云两端一体）</h2>
+  <svg width="100%" viewBox="0 0 1440 330">
+    <defs>
+      <marker id="ar" markerWidth="10" markerHeight="8" refX="9" refY="4"
+              orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#26d0ce"/></marker>
+      <marker id="ar2" markerWidth="10" markerHeight="8" refX="9" refY="4"
+              orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#7fb7b6"/></marker>
+    </defs>
+
+    <!-- 板端 -->
+    <rect x="20" y="40" width="420" height="250" rx="14" fill="#0e1a1e"
+          stroke="#1e3a40"/>
+    <text x="44" y="74" font-size="20" fill="#26d0ce" font-weight="700"
+          >板端 · openvela / NuttX</text>
+    <text x="44" y="100" font-size="15" fill="#8a8a8a"
+          >SF32LB52-DevKit-LCD，常驻 Agent 单任务（16K 栈）</text>
+    <g font-size="16">
+      <rect x="44" y="116" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="58" y="143" fill="#ececec">wc_proto  帧协议</text>
+      <rect x="238" y="116" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="252" y="143" fill="#ececec">wc_agent  路由</text>
+      <rect x="44" y="168" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="58" y="195" fill="#ececec">主动引擎 + 记忆</text>
+      <rect x="238" y="168" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="252" y="195" fill="#ececec">wc_ui  LVGL 三页</text>
+    </g>
+    <text x="44" y="240" font-size="15" fill="#8a8a8a"
+          >设备节点：lcd0 / input0 / rtc0 / pwm0 / ttyACM0 / console</text>
+    <text x="44" y="266" font-size="15" fill="#8a8a8a"
+          >断网自治：提醒 · 备忘 · 时间 · 亮度 · 状态</text>
+
+    <!-- 链路 -->
+    <line x1="440" y1="165" x2="560" y2="165" stroke="#26d0ce"
+          stroke-width="3" marker-end="url(#ar)"/>
+    <line x1="560" y1="185" x2="440" y2="185" stroke="#7fb7b6"
+          stroke-width="3" marker-end="url(#ar2)"/>
+    <text x="452" y="150" font-size="15" fill="#26d0ce">帧上行</text>
+    <text x="452" y="212" font-size="15" fill="#7fb7b6">SAY/动作下行</text>
+    <text x="452" y="238" font-size="14" fill="#8a8a8a">USB CDC-ACM</text>
+    <text x="452" y="258" font-size="14" fill="#8a8a8a">12Mbps 全速</text>
+
+    <!-- 网关 -->
+    <rect x="570" y="40" width="420" height="250" rx="14" fill="#0e1a1e"
+          stroke="#1e3a40"/>
+    <text x="594" y="74" font-size="20" fill="#26d0ce" font-weight="700"
+          >网关 · PC / Python</text>
+    <text x="594" y="100" font-size="15" fill="#8a8a8a"
+          >听、说、云端中继，单一程序 GUI 一键演示</text>
+    <g font-size="16">
+      <rect x="594" y="116" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="608" y="143" fill="#ececec">Vosk 离线唤醒</text>
+      <rect x="788" y="116" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="802" y="143" fill="#ececec">ASR / TTS</text>
+      <rect x="594" y="168" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="608" y="195" fill="#ececec">bridge / app</text>
+      <rect x="788" y="168" width="180" height="42" rx="8" fill="#14242a"/>
+      <text x="802" y="195" fill="#ececec">Skill 热安装</text>
+    </g>
+    <text x="594" y="240" font-size="15" fill="#8a8a8a"
+          >唤醒词统一为「你好，openvela」＋音近容错</text>
+    <text x="594" y="266" font-size="15" fill="#8a8a8a"
+          >无 Key 降级本地 Mock，演示不开天窗</text>
+
+    <!-- 云端 -->
+    <line x1="990" y1="165" x2="1090" y2="165" stroke="#26d0ce"
+          stroke-width="3" marker-end="url(#ar)"/>
+    <text x="998" y="150" font-size="15" fill="#26d0ce">HTTPS</text>
+
+    <rect x="1100" y="70" width="320" height="190" rx="14" fill="#0e1a1e"
+          stroke="#1e3a40"/>
+    <text x="1124" y="104" font-size="20" fill="#26d0ce" font-weight="700"
+          >云端大模型</text>
+    <text x="1124" y="134" font-size="16" fill="#ececec"
+          >大赛 MiMo（OpenAI 兼容）</text>
+    <text x="1124" y="164" font-size="15" fill="#8a8a8a"
+          >开放域理解 · 生成 · 摘要</text>
+    <text x="1124" y="192" font-size="15" fill="#8a8a8a"
+          >自然语言 → 结构化动作</text>
+    <text x="1124" y="220" font-size="15" fill="#8a8a8a"
+          >Skill 提示词注入</text>
+    <text x="1124" y="246" font-size="15" fill="#7fb7b6"
+          >回译为 SAY / REMIND / MEMO /</text>
+    <text x="1124" y="266" font-size="15" fill="#7fb7b6"
+          >BRIGHT / SKILL 行协议</text>
+  </svg>
+</div>
+
+<!-- ===== 实测数据 ===== -->
+<div class="arch">
+  <h2>实测结果（评审可直接复现）</h2>
+  <table>
+    <tr><th style="width:24%">维度</th><th style="width:38%">结果</th>
+        <th>复现方式</th></tr>
+    <tr><td>端到端用例</td>
+        <td><b>7 / 7 通过</b>：提醒（含到点主动推送）· 备忘（掉电持久化）·
+            状态 · 云端上行 · 云端回环 · Skill 热安装 · 心跳</td>
+        <td><code>python tests/test_e2e2.py</code></td></tr>
+    <tr><td>协议互操作</td>
+        <td>板端 C ↔ 上位机 Python <b>8/8 帧双向逐字节一致</b>；坏帧重同步通过；
+            反向 <b>3/3</b> 校验一致</td>
+        <td><code>python3 tests/test_wc_interop.py</code>（<b>无需开发板</b>，需 gcc）</td></tr>
+    <tr><td>性能</td>
+        <td>本地指令响应 <b>&lt;50ms</b>；UI 刷新 33ms、数据 1Hz；
+            boot 至 NSH 约 8s，Agent 启动 &lt;0.2s；镜像 <b>2.4MB</b></td>
+        <td>帧+控制台双通道时间戳日志</td></tr>
+    <tr><td>可靠性</td>
+        <td>连续运行 <b>&gt;30 分钟</b>无内存增长 / UI 卡顿；写失败区分
+            「忙丢帧(-2)」与「真错误(-1)」，<b>忙时丢帧不拆链路</b></td>
+        <td><code>docs/DEMO.md</code> 故障 FAQ + 实测现象</td></tr>
+    <tr><td>开发中定位并修复的真实缺陷</td>
+        <td><b>10 项</b>：USB 端点方向硬约束 · 提醒计时提速 50 倍 ·
+            栈上 2KB 缓冲硬故障 · 写失败误拆链路 · 备忘保存野指针（addr2line 定位）·
+            UI 百分比坐标误用 · 中文缺字方框 · 提醒到期基准错误 · 校时缺失 等</td>
+        <td><code>docs/PLAN.md</code> 逐条可追溯</td></tr>
+    <tr><td>AI-Native 开发</td>
+        <td>板端 C + 上位机 Python + 全部测试脚本与文档 <b>约 95% 由 AI 生成</b>；
+            人工负责需求、方案取舍、硬件接线与实机验收</td>
+        <td><code>logs/</code> AI Coding 日志（本仓提交）</td></tr>
+  </table>
+</div>
+
+<footer>
+  <div>仓库：<b>github.com/open-vela/contest2026_458_conglingkaishideopenvelashenghuo</b>（分支 dev-ai-contest-2026）</div>
+  <div>openvela 能力落地：<b>图形（LVGL 9.2）</b> · AI（端云协同） · 设备与服务（CDC-ACM / RTC / PWM / NSH）</div>
+  <div>许可：<b>Apache-2.0</b></div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+############################################################################
+# Contest 2026 team 458 WristClaw agent - Make.defs
+############################################################################
+
+ifneq ($(CONFIG_LVX_USE_DEMO_CONTEST2026_458_WRISTCLAW),)
+CONFIGURED_APPS += $(APPDIR)/packages/demos/contest2026_458_wristclaw
+endif
